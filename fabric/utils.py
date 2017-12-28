@@ -336,7 +336,7 @@ def error(message, func=None, exception=None, stdout=None, stderr=None):
     if func is None:
         func = fabric.state.env.warn_only and warn or abort
     # If exception printing is on, append a traceback to the message
-    if fabric.state.output.exceptions or fabric.state.output.debug:
+    if exception and (fabric.state.output.exceptions or fabric.state.output.debug):
         exception_message = format_exc()
         if exception_message:
             message += "\n\n" + exception_message
