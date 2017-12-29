@@ -5,6 +5,7 @@ Module providing easy API for working with remote files and folders.
 import hashlib
 import os
 import six
+import io
 
 from functools import partial
 
@@ -162,12 +163,8 @@ def upload_template(filename, destination, context=None, use_jinja=False,
     if backup and exists(destination):
         func("cp %s{,.bak}" % _expand_path(destination))
 
-    if six.PY3 is True and isinstance(text, bytes):
-        text = text.decode('utf-8')
-
-    # Upload the file.
     return put(
-        local_path=six.StringIO(text),
+        local_path=six.BytesIO(text),
         remote_path=destination,
         use_sudo=use_sudo,
         mirror_local_mode=mirror_local_mode,
