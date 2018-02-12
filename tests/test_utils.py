@@ -234,7 +234,7 @@ class TestErrorHandling(FabricTest):
         """
         error() includes traceback in message if exceptions logging is on
         """
-        error("error message", func=utils.abort, stdout=error)
+        error("error message", func=utils.abort, stdout=error, exception=True)
         assert_contains(self.dummy_string, sys.stdout.getvalue())
 
     @mock_streams('stdout')
@@ -247,7 +247,7 @@ class TestErrorHandling(FabricTest):
         """
         error() includes traceback in message if debug logging is on (backwardis compatibility)
         """
-        error("error message", func=utils.abort, stdout=error)
+        error("error message", func=utils.abort, stdout=error, exception=True)
         assert_contains(self.dummy_string, sys.stdout.getvalue())
 
     @mock_streams('stdout')
